@@ -14,4 +14,6 @@ public class Transaction {
     private TransactionType type;
     private BigDecimal amount;
     private LocalDateTime timestamp;
+    private Account sourceAccount;
+    private Account targetAccount;
 }

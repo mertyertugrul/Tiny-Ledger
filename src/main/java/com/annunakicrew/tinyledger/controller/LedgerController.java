@@ -5,10 +5,8 @@ import com.annunakicrew.tinyledger.service.LedgerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/ledger")
 public class LedgerController {
     private final LedgerService ledgerService;
 
@@ -18,12 +16,7 @@ public class LedgerController {
 
     @PostMapping("/transactions")
     public ResponseEntity<Transaction> recordTransaction(@RequestBody Transaction transaction) {
-        return ResponseEntity.ok(ledgerService.recordTransaction(transaction.getType(), transaction.getAmount()));
-    }
-
-    @GetMapping("/balance")
-    public ResponseEntity<BigDecimal> getCurrentBalance() {
-        return ResponseEntity.ok(ledgerService.getCurrentBalance());
+        return ResponseEntity.ok(ledgerService.recordTransaction(transaction));
     }
 
     @GetMapping("/transactions")
