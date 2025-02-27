@@ -126,27 +126,33 @@ To run the tests, execute the following command:
 ./gradlew test
 ```
 ## Sample Usage (cURL)
-1. Create Two Accounts
+### Create Two Accounts
 ```shell
-curl -X POST "http://localhost:8080/api/accounts?accountNumber=GB82WEST12345698765432&initialBalance=500"
-curl -X POST "http://localhost:8080/api/accounts?accountNumber=GB02NWBK60161331926819&initialBalance=300"
+curl -X POST -H "Content-Type: application/json" \
+-d '{"accountNumber": "GB82WEST12345698765432", "balance": 500}' \
+
+http://localhost:8080/api/accounts
+
+curl -X POST -H "Content-Type: application/json" \
+-d '{"accountNumber": "GB02NWBK60161331926819", "balance": 300}' \
+http://localhost:8080/api/accounts
 ```
-2. Transer 100 from Account1 to Account2
+### Transfer 100 from Account1 to Account2
 ```shell
 curl -X POST -H "Content-Type: application/json" \
 -d '{
-  "type": "TRANSFER",
-  "amount": 100,
-  "sourceAccount": {"accountNumber":"GB82WEST12345698765432"},
-  "targetAccount": {"accountNumber":"GB02NWBK60161331926819"}
+"type": "TRANSFER",
+"amount": 100,
+"sourceAccount": {"accountNumber": "GB82WEST12345698765432"},
+"targetAccount": {"accountNumber": "GB02NWBK60161331926819"}
 }' \
 http://localhost:8080/api/ledger/transactions
 ```
-3. Check All Transactions
+### Check All Transactions
 ```shell
 curl http://localhost:8080/api/ledger/transactions
 ```
-4. Check Updated Balances
+### Check Updated Balances
 ```shell
 curl http://localhost:8080/api/accounts/GB82WEST12345698765432
 curl http://localhost:8080/api/accounts/GB02NWBK60161331926819
